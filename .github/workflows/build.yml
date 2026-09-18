@@ -1,0 +1,32 @@
+name: Seri Katil Modu Derle
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 1. Kodları Çek
+      uses: actions/checkout@v4
+
+    - name: 2. .NET Motorunu Kur
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: 3. NuGet Paket Kaynaklarını Ekle
+      run: |
+        dotnet nuget add source https://nuget.bepinex.dev/v3/index.json -n BepInEx || true
+
+    - name: 4. Modu .DLL Olarak Derle
+      run: dotnet build -c Release -o ./cikti
+
+    - name: 5. SeriKatilMod.dll Dosyasını İndirilebilir Yap
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeriKatilMod-Paketi
+        path: ./cikti/*.dll
