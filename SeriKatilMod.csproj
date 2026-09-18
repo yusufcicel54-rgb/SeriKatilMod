@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
-    <PackageReference Include="HarmonyX" Version="2.10.*" />
-    <!-- MiraAPI ve Oyun Kütüphanesini Çeken Paket -->
-    <PackageReference Include="MiraAPI" Version="*" />
+    <!-- Doğru Paket Adı: AllOfUs.MiraAPI -->
+    <PackageReference Include="AllOfUs.MiraAPI" Version="0.4.3" />
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.735" IncludeAssets="compile" />
+    <PackageReference Include="HarmonyX" Version="2.10.2" />
   </ItemGroup>
 </Project>
