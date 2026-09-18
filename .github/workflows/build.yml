@@ -13,19 +13,22 @@ jobs:
     - name: 1. Kodları Çek
       uses: actions/checkout@v4
 
-    - name: 2. .NET Motorunu Kur
+    - name: 2. .NET 6 Kur
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '6.0.x'
 
-    - name: 3. NuGet Paket Kaynaklarını Ekle
+    - name: 3. BepInEx ve MiraAPI Paket Kaynaklarını Tanıt
       run: |
         dotnet nuget add source https://nuget.bepinex.dev/v3/index.json -n BepInEx || true
+        dotnet nuget add source https://nuget.samboy.dev/v3/index.json -n Samboy || true
 
-    - name: 4. Modu .DLL Olarak Derle
-      run: dotnet build -c Release -o ./cikti
+    - name: 4. Bağımlılıkları Geri Yükle ve Derle
+      run: |
+        dotnet restore
+        dotnet build -c Release -o ./cikti
 
-    - name: 5. SeriKatilMod.dll Dosyasını İndirilebilir Yap
+    - name: 5. SeriKatilMod.dll Dosyasını Paketle
       uses: actions/upload-artifact@v4
       with:
         name: SeriKatilMod-Paketi
